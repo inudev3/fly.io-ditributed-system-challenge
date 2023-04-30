@@ -1,4 +1,0 @@
-Error: Maelstrom input from STDIN could not be deserialize
-
-Caused by:
-    unknown variant `init`, expected `generate` or `generate_ok` at line 1 column 97
