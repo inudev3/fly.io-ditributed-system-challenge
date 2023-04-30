@@ -1,0 +1,159 @@
+2023-04-30 16:10:36,257{GMT}	INFO	[jepsen test runner] jepsen.core: Command line:
+lein run test -w unique-ids --bin target/debug/unique-id --nodes n1 --time-limit 10 --log-stderr
+2023-04-30 16:10:36,283{GMT}	INFO	[jepsen test runner] jepsen.core: Running test:
+{:args []
+ :remote
+ #jepsen.control.retry.Remote{:remote #jepsen.control.scp.Remote{:cmd-remote #jepsen.control.sshj.SSHJRemote{:concurrency-limit 6,
+                                                                                                             :conn-spec nil,
+                                                                                                             :client nil,
+                                                                                                             :semaphore nil},
+                                                                 :conn-spec nil},
+                              :conn nil}
+ :log-net-send false
+ :node-count nil
+ :availability nil
+ :max-txn-length 4
+ :concurrency 1
+ :db
+ #object[maelstrom.db$db$reify__16142
+         "0x2bd24c09"
+         "maelstrom.db$db$reify__16142@2bd24c09"]
+ :max-writes-per-key 16
+ :leave-db-running? false
+ :name "unique-ids"
+ :logging-json? false
+ :start-time
+ #object[org.joda.time.DateTime "0x649df002" "2023-04-30T16:10:36.236+09:00"]
+ :nemesis-interval 10
+ :net
+ #object[maelstrom.net$jepsen_net$reify__15251
+         "0x6cd7d05"
+         "maelstrom.net$jepsen_net$reify__15251@6cd7d05"]
+ :client
+ #object[maelstrom.workload.unique_ids$client$reify__20074
+         "0x34817fcc"
+         "maelstrom.workload.unique_ids$client$reify__20074@34817fcc"]
+ :barrier
+ #object[java.util.concurrent.CyclicBarrier
+         "0x5b95a754"
+         "java.util.concurrent.CyclicBarrier@5b95a754"]
+ :log-stderr true
+ :pure-generators true
+ :ssh {:dummy? true}
+ :rate 5
+ :checker
+ #object[jepsen.checker$compose$reify__11881
+         "0x500341c4"
+         "jepsen.checker$compose$reify__11881@500341c4"]
+ :argv
+ ("test"
+  "-w"
+  "unique-ids"
+  "--bin"
+  "target/debug/unique-id"
+  "--nodes"
+  "n1"
+  "--time-limit"
+  "10"
+  "--log-stderr")
+ :nemesis
+ (jepsen.nemesis.ReflCompose
+  {:fm {:start-partition 0,
+        :stop-partition 0,
+        :kill 1,
+        :start 1,
+        :pause 1,
+        :resume 1},
+   :nemeses [#unprintable "jepsen.nemesis.combined$partition_nemesis$reify__16416@3d4b3b94"
+             #unprintable "jepsen.nemesis.combined$db_nemesis$reify__16397@28b5cee"]})
+ :nodes ["n1"]
+ :test-count 1
+ :latency {:mean 0, :dist :constant}
+ :bin "target/debug/unique-id"
+ :generator
+ (jepsen.generator.TimeLimit
+  {:limit 10000000000,
+   :cutoff nil,
+   :gen (jepsen.generator.Any
+         {:gens [(jepsen.generator.OnThreads
+                  {:f #{:nemesis},
+                   :context-filter #object[jepsen.generator.context$make_thread_filter$lazy_filter__9167
+                                           "0x24bf95ec"
+                                           "jepsen.generator.context$make_thread_filter$lazy_filter__9167@24bf95ec"],
+                   :gen nil})
+                 (jepsen.generator.OnThreads
+                  {:f #jepsen.generator.context.AllBut{:element :nemesis},
+                   :context-filter #object[jepsen.generator.context$make_thread_filter$lazy_filter__9167
+                                           "0x13ae0ffd"
+                                           "jepsen.generator.context$make_thread_filter$lazy_filter__9167@13ae0ffd"],
+                   :gen (jepsen.generator.Stagger
+                         {:dt 400000000,
+                          :next-time nil,
+                          :gen (jepsen.generator.Repeat
+                                {:remaining -1, :gen {:f :generate}})})})]})})
+ :log-net-recv false
+ :os
+ #object[maelstrom.net$jepsen_os$reify__15254
+         "0x2a71d430"
+         "maelstrom.net$jepsen_os$reify__15254@2a71d430"]
+ :time-limit 10
+ :workload :unique-ids
+ :consistency-models [:strict-serializable]
+ :topology :grid}
+
+2023-04-30 16:10:37,316{GMT}	INFO	[jepsen node n1] maelstrom.net: Starting Maelstrom network
+2023-04-30 16:10:37,332{GMT}	INFO	[jepsen test runner] jepsen.db: Tearing down DB
+2023-04-30 16:10:37,339{GMT}	INFO	[jepsen test runner] jepsen.db: Setting up DB
+2023-04-30 16:10:37,341{GMT}	INFO	[jepsen node n1] maelstrom.service: Starting services: (lin-kv lin-tso lww-kv seq-kv)
+2023-04-30 16:10:37,345{GMT}	INFO	[jepsen node n1] maelstrom.db: Setting up n1
+2023-04-30 16:10:37,347{GMT}	INFO	[jepsen node n1] maelstrom.process: launching target/debug/unique-id []
+2023-04-30 16:10:37,376{GMT}	INFO	[n1 stderr] maelstrom.process: Error: Maelstrom input from STDIN could not be deserialize
+2023-04-30 16:10:37,377{GMT}	INFO	[n1 stderr] maelstrom.process: 
+2023-04-30 16:10:37,377{GMT}	INFO	[n1 stderr] maelstrom.process: Caused by:
+2023-04-30 16:10:37,377{GMT}	INFO	[n1 stderr] maelstrom.process:     unknown variant `init`, expected `generate` or `generate_ok` at line 1 column 97
+2023-04-30 16:10:47,391{GMT}	INFO	[jepsen node n1] maelstrom.db: Tearing down n1
+2023-04-30 16:10:48,400{GMT}	INFO	[jepsen node n1] maelstrom.net: Shutting down Maelstrom network
+2023-04-30 16:10:48,410{GMT}	WARN	[jepsen test runner] jepsen.core: Test crashed!
+clojure.lang.ExceptionInfo: Node n1 crashed with exit status 1. Before crashing, it wrote to STDOUT:
+
+
+
+And to STDERR:
+
+Error: Maelstrom input from STDIN could not be deserialize
+
+Caused by:
+    unknown variant `init`, expected `generate` or `generate_ok` at line 1 column 97
+
+Full STDERR logs are available in /Users/jeong-in-u/CLionProjects/rustengan/store/unique-ids/20230430T161036.236+0900/node-logs/n1.log
+	at slingshot.support$stack_trace.invoke(support.clj:201)
+	at maelstrom.process$stop_node_BANG_.invokeStatic(process.clj:239)
+	at maelstrom.process$stop_node_BANG_.invoke(process.clj:217)
+	at maelstrom.db$db$reify__16142.teardown_BANG_(db.clj:75)
+	at jepsen.db$fn__8744$G__8725__8748.invoke(db.clj:12)
+	at jepsen.db$fn__8744$G__8724__8753.invoke(db.clj:12)
+	at clojure.core$partial$fn__5908.invoke(core.clj:2642)
+	at jepsen.control$on_nodes$fn__8599.invoke(control.clj:314)
+	at clojure.lang.AFn.applyToHelper(AFn.java:154)
+	at clojure.lang.AFn.applyTo(AFn.java:144)
+	at clojure.core$apply.invokeStatic(core.clj:667)
+	at clojure.core$with_bindings_STAR_.invokeStatic(core.clj:1990)
+	at clojure.core$with_bindings_STAR_.doInvoke(core.clj:1990)
+	at clojure.lang.RestFn.applyTo(RestFn.java:142)
+	at clojure.core$apply.invokeStatic(core.clj:671)
+	at clojure.core$bound_fn_STAR_$fn__5818.doInvoke(core.clj:2020)
+	at clojure.lang.RestFn.invoke(RestFn.java:408)
+	at dom_top.core$real_pmap_helper$build_thread__211$fn__212.invoke(core.clj:163)
+	at clojure.lang.AFn.applyToHelper(AFn.java:152)
+	at clojure.lang.AFn.applyTo(AFn.java:144)
+	at clojure.core$apply.invokeStatic(core.clj:667)
+	at clojure.core$with_bindings_STAR_.invokeStatic(core.clj:1990)
+	at clojure.core$with_bindings_STAR_.doInvoke(core.clj:1990)
+	at clojure.lang.RestFn.invoke(RestFn.java:425)
+	at clojure.lang.AFn.applyToHelper(AFn.java:156)
+	at clojure.lang.RestFn.applyTo(RestFn.java:132)
+	at clojure.core$apply.invokeStatic(core.clj:671)
+	at clojure.core$bound_fn_STAR_$fn__5818.doInvoke(core.clj:2020)
+	at clojure.lang.RestFn.invoke(RestFn.java:397)
+	at clojure.lang.AFn.run(AFn.java:22)
+	at java.base/java.lang.Thread.run(Thread.java:829)
